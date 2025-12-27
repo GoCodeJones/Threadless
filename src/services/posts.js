@@ -1,20 +1,22 @@
-const db = require('../db');
+const db = require("../db");
 
 // insere um post fixo (apenas se não existir)
 function seedPost() {
   const exists = db
-    .prepare('SELECT 1 FROM posts WHERE slug = ?')
-    .get('primeiro-post');
+    .prepare("SELECT 1 FROM posts WHERE slug = ?")
+    .get("primeiro-post");
 
   if (!exists) {
-    db.prepare(`
-      INSERT INTO posts (id, slug, title, content, published_at)
-      VALUES (?, ?, ?, ?, ?)
-    `).run(
-      'post-1',
-      'primeiro-post',
-      'Primeiro Post',
-      'Olá. Este é o primeiro post do Threadless.',
+    db.prepare(
+      `
+  INSERT INTO posts (id, slug, title, content, published_at)
+  VALUES (?, ?, ?, ?, ?)
+`
+    ).run(
+      "post-1",
+      "primeiro-post",
+      "Primeiro Post",
+      "Olá.\n\nEste é o **primeiro post** do Threadless.\n\n- Simples\n- Leve\n- Descentralizado",
       new Date().toISOString()
     );
   }
@@ -22,22 +24,22 @@ function seedPost() {
 
 function getAllPosts() {
   return db
-    .prepare('SELECT slug, title, content, published_at FROM posts ORDER BY published_at DESC')
+    .prepare(
+      "SELECT slug, title, content, published_at FROM posts ORDER BY published_at DESC"
+    )
     .all();
 }
 
 function getPostBySlug(slug) {
   return db
     .prepare(
-      'SELECT slug, title, content, published_at FROM posts WHERE slug = ?'
+      "SELECT slug, title, content, published_at FROM posts WHERE slug = ?"
     )
     .get(slug);
 }
 
-
 module.exports = {
   seedPost,
   getAllPosts,
-  getPostBySlug
+  getPostBySlug,
 };
-
