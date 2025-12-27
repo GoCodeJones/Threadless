@@ -11,6 +11,8 @@ const trustRoute = require('./routes/trust');
 const feedRoute = require('./routes/feed');
 const postRoute = require('./routes/post');
 const connectionsRoute = require('./routes/connections');
+const syncRoute = require('./routes/sync');
+
 
 const app = express();
 const PORT = 3000;
@@ -20,7 +22,7 @@ app.use(trustRoute);
 app.use(feedRoute);
 app.use(postRoute);
 app.use(connectionsRoute);
-
+app.use(syncRoute);
 
 
 app.listen(PORT, () => {

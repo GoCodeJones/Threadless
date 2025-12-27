@@ -12,3 +12,12 @@ CREATE TABLE IF NOT EXISTS connections (
   site TEXT,
   feed TEXT
 );
+
+CREATE TABLE IF NOT EXISTS remote_posts (
+  id TEXT PRIMARY KEY,
+  connection_id TEXT,
+  slug TEXT,
+  title TEXT,
+  content TEXT,
+  published_at TEXT
+);
