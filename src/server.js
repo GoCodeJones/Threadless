@@ -12,6 +12,8 @@ const feedRoute = require('./routes/feed');
 const postRoute = require('./routes/post');
 const connectionsRoute = require('./routes/connections');
 const syncRoute = require('./routes/sync');
+const networkRoute = require('./routes/network');
+
 
 
 const app = express();
@@ -23,6 +25,7 @@ app.use(feedRoute);
 app.use(postRoute);
 app.use(connectionsRoute);
 app.use(syncRoute);
+app.use(networkRoute);
 
 
 app.listen(PORT, () => {
