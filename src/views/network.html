@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Threadless Network</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #0f0f0f;
+      color: #eaeaea;
+      margin: 0;
+      padding: 2rem;
+    }
+
+    header {
+      max-width: 800px;
+      margin: 0 auto 2rem;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      color: #aaa;
+    }
+
+    .feed {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .post {
+      border: 1px solid #2a2a2a;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      background: #151515;
+    }
+
+    .meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.8rem;
+      font-size: 0.9rem;
+      color: #bbb;
+    }
+
+    .trust {
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.75rem;
+    }
+
+    .trust.high { background: #1e7f43; color: #dfffea; }
+    .trust.medium { background: #7f6a1e; color: #fff3d6; }
+    .trust.low { background: #7f1e1e; color: #ffe0e0; }
+
+    h2 {
+      margin: 0 0 0.5rem;
+      font-size: 1.4rem;
+    }
+
+    .content {
+      line-height: 1.6;
+      color: #ddd;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Threadless Network</h1>
+  <p>Rede descentralizada de blogs conectados por confiança explícita.</p>
+</header>
+
+<section class="feed" id="feed"></section>
+
+<script>
+async function loadNetwork() {
+  const res = await fetch('/network');
+  const data = await res.json();
+
+  const feed = document.getElementById('feed');
+  feed.innerHTML = '';
+
+  data.posts.forEach(post => {
+    const trustClass =
+      post.trust >= 0.7 ? 'high' :
+      post.trust >= 0.4 ? 'medium' : 'low';
+
+    const el = document.createElement('div');
+    el.className = 'post';
+
+    el.innerHTML = `
+      <div class="meta">
+        <span>${post.origin}</span>
+        <span class="trust ${trustClass}">trust ${post.trust.toFixed(2)}</span>
+      </div>
+      <h2>${post.title}</h2>
+      <div class="content">${post.content}</div>
+    `;
+
+    feed.appendChild(el);
+  });
+}
+
+loadNetwork();
+</script>
+
+</body>
+</html>
