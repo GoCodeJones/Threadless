@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const postsService = require('../services/posts');
+const { signPayload } = require('../utils/signature');
 
 router.get('/feed', (req, res) => {
   const posts = postsService.getAllPosts();
 
-  res.json({
+  const payload = {
     threadless: 'v0',
     blog: {
       id: process.env.BLOG_ID || 'threadless-local',
@@ -18,6 +19,13 @@ router.get('/feed', (req, res) => {
       content: post.content,
       published_at: post.published_at
     }))
+  };
+
+  const signature = signPayload(payload, process.env.BLOG_SECRET);
+
+  res.json({
+    ...payload,
+    signature
   });
 });
 
