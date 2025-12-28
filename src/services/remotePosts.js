@@ -23,7 +23,11 @@ function saveRemotePost(post, connectionId) {
 function getAllRemotePosts() {
   return db
     .prepare(`
-      SELECT title, content, published_at
+      SELECT
+        connection_id AS origin,
+        title,
+        content,
+        published_at
       FROM remote_posts
       ORDER BY published_at DESC
     `)

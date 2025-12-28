@@ -14,10 +14,10 @@ const connectionsRoute = require('./routes/connections');
 const syncRoute = require('./routes/sync');
 const networkRoute = require('./routes/network');
 
-
-
 const app = express();
 const PORT = 3000;
+
+app.use(express.json());
 
 app.use('/', homeRoute);
 app.use(trustRoute);
@@ -26,7 +26,6 @@ app.use(postRoute);
 app.use(connectionsRoute);
 app.use(syncRoute);
 app.use(networkRoute);
-
 
 app.listen(PORT, () => {
   console.log(`Servidor ativo em http://localhost:${PORT}`);
