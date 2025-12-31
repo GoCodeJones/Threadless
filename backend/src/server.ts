@@ -25,6 +25,9 @@ app.get('/', (req: Request, res: Response) => {
     version: '0.1.0',
     status: 'running',
     endpoints: {
+      about: {
+        info: 'GET /api/about (public)'
+      },
       auth: {
         register: 'POST /api/auth/register',
         login: 'POST /api/auth/login',
