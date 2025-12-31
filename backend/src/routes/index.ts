@@ -4,6 +4,7 @@ import postRoutes from './post.routes';
 import connectionRoutes from './connection.routes';
 import trustRoutes from './trust.routes';
 import commentRoutes from './comment.routes';
+import feedRoutes from './feed.routes';
 
 const router = Router();
 
@@ -12,5 +13,6 @@ router.use('/posts', postRoutes);
 router.use('/connections', connectionRoutes);
 router.use('/trust', trustRoutes);
 router.use('/comments', commentRoutes);
+router.use('/feed', feedRoutes);
 
 export default router;
