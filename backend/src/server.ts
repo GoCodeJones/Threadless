@@ -57,14 +57,19 @@ app.get('/', (req: Request, res: Response) => {
       feed: {
         personalFeed: 'GET /api/feed?limit=50&offset=0 (requires token)',
         publicFeed: 'GET /api/feed/public?limit=50&offset=0 (requires token)'
+      },
+      profile: {
+        getMyProfile: 'GET /api/profile/me (requires token)',
+        getUserProfile: 'GET /api/profile/user/:userId (requires token)',
+        updateProfile: 'PUT /api/profile/me (requires token)'
       }
     },
     badges: {
-      'Newcomer 🌱': '0-20 points',
-      'Free Agent 🦅': '21-40 points',
-      'Independent 💪': '41-60 points',
-      'Sovereign 🗽': '61-80 points',
-      'Founder 🏛️': '81-100 points'
+      'Newcomer': '0-20 points',
+      'Free Agent': '21-40 points',
+      'Independent': '41-60 points',
+      'Sovereign': '61-80 points',
+      'Founder': '81-100 points'
     },
     timestamp: new Date().toISOString()
   });
