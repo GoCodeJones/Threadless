@@ -19,7 +19,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api', routes);
 
 // Rota raiz
-// Rota raiz
 app.get('/', (req: Request, res: Response) => {
   res.json({
     message: 'Threadless API - MVP Backend',
@@ -43,7 +42,20 @@ app.get('/', (req: Request, res: Response) => {
         connect: 'POST /api/connections/connect (requires token)',
         myConnections: 'GET /api/connections/my-connections (requires token)',
         checkConnection: 'GET /api/connections/check/:userId (requires token)'
+      },
+      trust: {
+        getMyScore: 'GET /api/trust/me (requires token)',
+        getUserScore: 'GET /api/trust/user/:userId (requires token)',
+        updateMyScore: 'POST /api/trust/update (requires token)',
+        recalculateAll: 'POST /api/trust/recalculate-all (requires admin)'
       }
+    },
+    badges: {
+      'Newcomer': '0-20 points',
+      'Free Agent': '21-40 points',
+      'Independent': '41-60 points',
+      'Sovereign': '61-80 points',
+      'Founder': '81-100 points'
     },
     timestamp: new Date().toISOString()
   });
