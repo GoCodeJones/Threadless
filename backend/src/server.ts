@@ -29,6 +29,13 @@ app.get('/', (req: Request, res: Response) => {
         register: 'POST /api/auth/register',
         login: 'POST /api/auth/login',
         me: 'GET /api/auth/me (requires token)'
+      },
+      posts: {
+        create: 'POST /api/posts (requires token)',
+        getMyPosts: 'GET /api/posts/my-posts (requires token)',
+        getById: 'GET /api/posts/:id (requires token)',
+        update: 'PUT /api/posts/:id (requires token)',
+        delete: 'DELETE /api/posts/:id (requires token)'
       }
     },
     timestamp: new Date().toISOString()
