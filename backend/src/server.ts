@@ -19,6 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api', routes);
 
 // Rota raiz
+// Rota raiz
 app.get('/', (req: Request, res: Response) => {
   res.json({
     message: 'Threadless API - MVP Backend',
@@ -36,6 +37,12 @@ app.get('/', (req: Request, res: Response) => {
         getById: 'GET /api/posts/:id (requires token)',
         update: 'PUT /api/posts/:id (requires token)',
         delete: 'DELETE /api/posts/:id (requires token)'
+      },
+      connections: {
+        generateKey: 'POST /api/connections/generate-key (requires token)',
+        connect: 'POST /api/connections/connect (requires token)',
+        myConnections: 'GET /api/connections/my-connections (requires token)',
+        checkConnection: 'GET /api/connections/check/:userId (requires token)'
       }
     },
     timestamp: new Date().toISOString()
