@@ -48,6 +48,11 @@ app.get('/', (req: Request, res: Response) => {
         getUserScore: 'GET /api/trust/user/:userId (requires token)',
         updateMyScore: 'POST /api/trust/update (requires token)',
         recalculateAll: 'POST /api/trust/recalculate-all (requires admin)'
+      },
+      comments: {
+        create: 'POST /api/comments (requires token)',
+        getByPost: 'GET /api/comments/post/:postId (requires token)',
+        delete: 'DELETE /api/comments/:id (requires token)'
       }
     },
     badges: {
