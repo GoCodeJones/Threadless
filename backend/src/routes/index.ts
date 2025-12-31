@@ -6,6 +6,7 @@ import trustRoutes from './trust.routes';
 import commentRoutes from './comment.routes';
 import feedRoutes from './feed.routes';
 import profileRoutes from './profile.routes';
+import aboutRoutes from './about.routes';
 
 const router = Router();
 
@@ -16,5 +17,6 @@ router.use('/trust', trustRoutes);
 router.use('/comments', commentRoutes);
 router.use('/feed', feedRoutes);
 router.use('/profile', profileRoutes);
+router.use('/about', aboutRoutes);
 
 export default router;
