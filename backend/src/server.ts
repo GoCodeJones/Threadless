@@ -1,8 +1,9 @@
 import express, { Application, Request, Response } from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import { initDatabase } from './config/database';
+import { createTables } from './config/schema';
 
-// Carregar variáveis de ambiente
 dotenv.config();
 
 const app: Application = express();
@@ -28,10 +29,22 @@ app.get('/health', (req: Request, res: Response) => {
   res.json({ status: 'ok', uptime: process.uptime() });
 });
 
-// Iniciar servidor
-app.listen(PORT, () => {
-  console.log(`🚀 Threadless API rodando em http://localhost:${PORT}`);
-  console.log(`📝 Ambiente: ${process.env.NODE_ENV}`);
-});
+// Inicializar banco e servidor
+async function startServer() {
+  try {
+    const db = await initDatabase();
+    await createTables(db);
+    
+    app.listen(PORT, () => {
+      console.log(`Threadless API rodando em http://localhost:${PORT}`);
+      console.log(`Ambiente: ${process.env.NODE_ENV}`);
+    });
+  } catch (error) {
+    console.error('Failed to start server:', error);
+    process.exit(1);
+  }
+}
+
+startServer();
 
 export default app;
