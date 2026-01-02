@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { useAuth } from '@/contexts/AuthContext';
-import { useRouter } from 'next/navigation';
+import Link from "next/link";
+import { useAuth } from "@/contexts/AuthContext";
+import { useRouter } from "next/navigation";
 
 export default function Navbar() {
   const { user, logout } = useAuth();
@@ -10,7 +10,7 @@ export default function Navbar() {
 
   const handleLogout = () => {
     logout();
-    router.push('/');
+    router.push("/");
   };
 
   return (
@@ -29,13 +29,22 @@ export default function Navbar() {
           <div className="flex items-center space-x-4">
             {user ? (
               <>
-                <Link href="/feed" className="text-gray-700 hover:text-gray-900">
+                <Link
+                  href="/feed"
+                  className="text-gray-700 hover:text-gray-900"
+                >
                   Feed
                 </Link>
-                <Link href="/connections" className="text-gray-700 hover:text-gray-900">
+                <Link
+                  href="/connections"
+                  className="text-gray-700 hover:text-gray-900"
+                >
                   Connections
                 </Link>
-                <Link href="/profile" className="text-gray-700 hover:text-gray-900">
+                <Link
+                  href="/profile"
+                  className="text-gray-700 hover:text-gray-900"
+                >
                   Profile
                 </Link>
                 <div className="flex items-center space-x-2">
@@ -52,7 +61,10 @@ export default function Navbar() {
               </>
             ) : (
               <>
-                <Link href="/about" className="text-gray-700 hover:text-gray-900">
+                <Link
+                  href="/about"
+                  className="text-gray-700 hover:text-gray-900"
+                >
                   About
                 </Link>
                 <Link
@@ -66,6 +78,19 @@ export default function Navbar() {
                   className="px-4 py-2 text-sm border border-gray-900 hover:bg-gray-50 rounded"
                 >
                   Register
+                </Link>
+                // Encontre a linha com os links quando o usuário está logado
+                <Link
+                  href="/profile"
+                  className="text-gray-700 hover:text-gray-900"
+                >
+                  Profile
+                </Link>
+                <Link
+                  href="/about"
+                  className="text-gray-700 hover:text-gray-900"
+                >
+                  About
                 </Link>
               </>
             )}
