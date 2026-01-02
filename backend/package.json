@@ -4,10 +4,11 @@
   "description": "Threadless MVP - Decentralized Social Network Backend",
   "main": "dist/server.js",
   "scripts": {
-    "dev": "nodemon src/server.ts",
-    "build": "tsc",
-    "start": "node dist/server.js",
-    "seed": "ts-node src/config/seed.ts"
+  "dev": "nodemon src/server.ts",
+  "build": "tsc",
+  "start": "node dist/server.js",
+  "seed": "ts-node src/config/seed.ts",
+  "postinstall": "npm run build"
   },
   "author": "Jones",
   "license": "MIT",
