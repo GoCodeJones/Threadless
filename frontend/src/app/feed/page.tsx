@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useRouter } from 'next/navigation';
 import Navbar from '@/components/Navbar';
+import PostCard from '@/components/PostCard';
 import { feedService, postService } from '@/services/api';
 import { Post } from '@/types';
 
@@ -113,27 +114,7 @@ export default function FeedPage() {
           ) : (
             <div className="space-y-4">
               {posts.map((post) => (
-                <div key={post.id} className="bg-white rounded-lg shadow-sm p-6">
-                  <div className="flex items-start justify-between mb-3">
-                    <div className="flex items-center space-x-2">
-                      <span className="font-semibold">{post.author?.username}</span>
-                      {post.author?.isAdmin && (
-                        <span className="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded">Admin</span>
-                      )}
-                      {post.is_promoted && (
-                        <span className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded">Promoted</span>
-                      )}
-                    </div>
-                    <span className="text-sm text-gray-500">
-                      {new Date(post.created_at).toLocaleDateString()}
-                    </span>
-                  </div>
-                  <p className="text-gray-800 mb-3 whitespace-pre-wrap">{post.content}</p>
-                  <div className="flex items-center space-x-4 text-sm text-gray-500">
-                    <span className="capitalize">{post.visibility}</span>
-                    <span>{post.commentsCount || 0} comments</span>
-                  </div>
-                </div>
+                <PostCard key={post.id} post={post} />
               ))}
             </div>
           )}

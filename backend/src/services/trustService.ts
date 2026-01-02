@@ -61,7 +61,8 @@ export class TrustService {
     // 4. Account Age (max 10 pontos)
     const createdAt = new Date(user.created_at!);
     const now = new Date();
-    const monthsOld = Math.floor((now.getTime() - createdAt.getTime()) / (1000 * 60 * 60 * 24 * 30));
+    const ageInMs = now.getTime() - createdAt.getTime();
+    const monthsOld = Math.max(0, Math.floor(ageInMs / (1000 * 60 * 60 * 24 * 30)));
     const accountAge = Math.min(monthsOld, 10);
 
     // 5. Connections Count (max 10 pontos)
