@@ -7,6 +7,7 @@ import commentRoutes from './comment.routes';
 import feedRoutes from './feed.routes';
 import profileRoutes from './profile.routes';
 import aboutRoutes from './about.routes';
+import adminRoutes from './admin.routes';
 
 const router = Router();
 
@@ -18,5 +19,6 @@ router.use('/comments', commentRoutes);
 router.use('/feed', feedRoutes);
 router.use('/profile', profileRoutes);
 router.use('/about', aboutRoutes);
+router.use('/admin', adminRoutes);
 
 export default router;

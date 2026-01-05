@@ -29,23 +29,22 @@ export default function Navbar() {
           <div className="flex items-center space-x-4">
             {user ? (
               <>
-                <Link
-                  href="/feed"
-                  className="text-gray-700 hover:text-gray-900"
-                >
+                <Link href="/feed" className="text-gray-700 hover:text-gray-900">
                   Feed
                 </Link>
-                <Link
-                  href="/connections"
-                  className="text-gray-700 hover:text-gray-900"
-                >
+                <Link href="/connections" className="text-gray-700 hover:text-gray-900">
                   Connections
                 </Link>
-                <Link
-                  href="/profile"
-                  className="text-gray-700 hover:text-gray-900"
-                >
+                <Link href="/profile" className="text-gray-700 hover:text-gray-900">
                   Profile
+                </Link>
+                {user.isAdmin && (
+                  <Link href="/admin" className="text-yellow-600 hover:text-yellow-700 font-semibold">
+                    Admin
+                  </Link>
+                )}
+                <Link href="/about" className="text-gray-700 hover:text-gray-900">
+                  About
                 </Link>
                 <div className="flex items-center space-x-2">
                   <span className="text-sm text-gray-600">
@@ -61,36 +60,14 @@ export default function Navbar() {
               </>
             ) : (
               <>
-                <Link
-                  href="/about"
-                  className="text-gray-700 hover:text-gray-900"
-                >
+                <Link href="/about" className="text-gray-700 hover:text-gray-900">
                   About
                 </Link>
-                <Link
-                  href="/login"
-                  className="px-4 py-2 text-sm bg-gray-900 text-white hover:bg-gray-800 rounded"
-                >
+                <Link href="/login" className="px-4 py-2 text-sm bg-gray-900 text-white hover:bg-gray-800 rounded">
                   Login
                 </Link>
-                <Link
-                  href="/register"
-                  className="px-4 py-2 text-sm border border-gray-900 hover:bg-gray-50 rounded"
-                >
+                <Link href="/register" className="px-4 py-2 text-sm border border-gray-900 hover:bg-gray-50 rounded">
                   Register
-                </Link>
-                // Encontre a linha com os links quando o usuário está logado
-                <Link
-                  href="/profile"
-                  className="text-gray-700 hover:text-gray-900"
-                >
-                  Profile
-                </Link>
-                <Link
-                  href="/about"
-                  className="text-gray-700 hover:text-gray-900"
-                >
-                  About
                 </Link>
               </>
             )}
