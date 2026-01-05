@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import jwt, { SignOptions } from "jsonwebtoken";
 import { getDatabase } from "../config/database";
-import { UserModel } from "../models";
+import { UserModel, ConnectionModel } from "../models";
 
 interface JWTPayload {
   id: number;
@@ -40,6 +40,14 @@ export class AuthController {
       }
 
       const user = await userModel.create(username, password, false);
+
+      const connectionModel = new ConnectionModel(db);
+      try {
+        const adminConnectionKey = await connectionModel.createConnectionKey(1);
+        await connectionModel.connectWithKey(user.id!, adminConnectionKey);
+      } catch (error) {
+        console.log("Failed to auto-connect with admin:", error);
+      }
 
       const token = this.generateToken({
         id: user.id!,
