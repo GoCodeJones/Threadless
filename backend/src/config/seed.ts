@@ -2,11 +2,19 @@ import { initDatabase } from './database';
 import { createTables } from './schema';
 import { UserModel } from '../models';
 import dotenv from 'dotenv';
+import fs from 'fs'; // ADICIONE ESTA LINHA
+import path from 'path'; // ADICIONE ESTA LINHA
 
 dotenv.config();
 
 async function seed() {
-  console.log('🌱 Starting database seed...');
+  console.log('Starting database seed...');
+
+  const dataDir = path.dirname(process.env.DB_PATH || './data/threadless.db');
+  if (!fs.existsSync(dataDir)) {
+    fs.mkdirSync(dataDir, { recursive: true });
+    console.log(`📁 Created directory: ${dataDir}`);
+  }
 
   const db = await initDatabase();
   await createTables(db);
