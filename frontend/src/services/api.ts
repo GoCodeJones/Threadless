@@ -131,18 +131,21 @@ export const trustService = {
 
 // Comments
 export const commentService = {
+  // Get comments for a post
+  getByPostId: async (postId: number) => {
+    const response = await api.get(`/comments/post/${postId}`);
+    return response.data;
+  },
+
+  // Create a comment
   create: async (postId: number, content: string) => {
     const response = await api.post('/comments', { postId, content });
     return response.data;
   },
 
-  getByPost: async (postId: number) => {
-    const response = await api.get(`/comments/post/${postId}`);
-    return response.data.comments;
-  },
-
-  delete: async (id: number) => {
-    const response = await api.delete(`/comments/${id}`);
+  // Delete a comment
+  delete: async (commentId: number) => {
+    const response = await api.delete(`/comments/${commentId}`);
     return response.data;
   },
 };

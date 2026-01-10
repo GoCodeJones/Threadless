@@ -1,13 +1,17 @@
-"use client";
+'use client';
 
-import { Post } from "@/types";
-import Link from "next/link";
+import Link from 'next/link';
+import { Post } from '@/types';
+import { useState } from 'react';
+import CommentSection from './CommentSection';
 
 interface PostCardProps {
   post: Post;
 }
 
 export default function PostCard({ post }: PostCardProps) {
+  const [showComments, setShowComments] = useState(false);
+
   return (
     <div className="bg-gradient-to-br from-[#161b22] to-[#1c2128] border border-[#30363d] rounded-xl p-6 hover:border-[#388bfd] transition-all shadow-lg shadow-black/20">
       <div className="flex items-start justify-between mb-4">
@@ -60,12 +64,16 @@ export default function PostCard({ post }: PostCardProps) {
             <span className="capitalize font-medium">{post.visibility}</span>
           </div>
           
-          <div className="flex items-center space-x-1.5 text-sm text-[#7d8590] hover:text-[#58a6ff] transition-colors cursor-pointer" style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>
+          <button
+            onClick={() => setShowComments(!showComments)}
+            className="flex items-center space-x-1.5 text-sm text-[#7d8590] hover:text-[#58a6ff] transition-colors"
+            style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
+          >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
             </svg>
             <span className="font-medium">{post.commentsCount || 0}</span>
-          </div>
+          </button>
         </div>
         
         <div className="flex items-center space-x-2">
@@ -76,6 +84,11 @@ export default function PostCard({ post }: PostCardProps) {
           </button>
         </div>
       </div>
+
+      {/* Comments Section */}
+      {showComments && (
+        <CommentSection postId={post.id} initialCount={post.commentsCount} />
+      )}
     </div>
   );
 }
