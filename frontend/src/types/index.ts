@@ -50,3 +50,21 @@ export interface Comment {
     trustScore: number;
   };
 }
+
+export interface Comment {
+  id: number;
+  post_id: number;
+  user_id: number;
+  content: string;
+  created_at: string;
+  user: {
+    id: number;
+    username: string;
+    trustScore: number;
+  };
+}
+
+export interface CommentResponse {
+  comments: Comment[];
+  count: number;
+}
